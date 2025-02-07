@@ -7,3 +7,7 @@ backgroundModule.trigger();
 import { RandomAudioModule } from './modules/randomAudio';
 const randomAudioModule = new RandomAudioModule('randomAudio', 'Случайный звук');
 randomAudioModule.trigger();
+
+import { VideoPlayModule } from './modules/randomAudio';
+const videoPlayModule = new VideoPlayModule('videoPlay', 'Видео');
+videoPlayModule.trigger();
