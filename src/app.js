@@ -8,6 +8,6 @@ import { RandomAudioModule } from './modules/randomAudio';
 const randomAudioModule = new RandomAudioModule('randomAudio', 'Случайный звук');
 randomAudioModule.trigger();
 
-import { VideoPlayModule } from './modules/randomAudio';
+import { VideoPlayModule } from './modules/videoPlay';
 const videoPlayModule = new VideoPlayModule('videoPlay', 'Видео');
 videoPlayModule.trigger();
