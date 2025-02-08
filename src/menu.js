@@ -22,7 +22,7 @@ export class ContextMenu extends Menu {
 			new BackgroundModule('1', 'Изменить цвет фона'),
 			new ShapeModule('2', 'ShapeModule'),
 			new CustomModule('3', 'Сообщение'),
-			new VideoPlayModule('4', 'Видео'),
+			new VideoPlayModule('4', 'Случайное видео'),
 			new RandomAudioModule('5', 'Случайный звук'),
 		]
 		modules.forEach(el => {
