@@ -46,9 +46,8 @@ export class ContextMenu extends Menu {
 			new RandomAudioModule('5', 'Случайный звук'),
 			new TimerModule('6', 'Таймер'),
 		]
-		modules.forEach(el => {
-			this.el.innerHTML = this.el.innerHTML + el.toHTML()
-		})
+		const listModules = modules.map(el => el.toHTML()).join('')
+		this.el.innerHTML = listModules
 		this.el.addEventListener('click', e => {
 			const type = e.target.dataset.type
 			this.modules[+type].trigger()
