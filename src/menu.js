@@ -5,6 +5,7 @@ import { ShapeModule } from './modules/shape.module'
 import { CustomModule } from './modules/custom_message.module'
 import { RandomAudioModule } from './modules/randomAudio'
 import { VideoPlayModule } from './modules/videoPlay'
+import { TimerModule } from './modules/timer.module'
 
 export class ContextMenu extends Menu {
 	constructor(selector) {
@@ -16,6 +17,7 @@ export class ContextMenu extends Menu {
 			new CustomModule('3', 'Случайное сообщение'),
 			new VideoPlayModule('4', 'Случайное видео'),
 			new RandomAudioModule('5', 'Случайный звук'),
+			new TimerModule('6', 'Таймер'),
 		]
 		this.$bodyChildNodes = document.body.childNodes
 	}
@@ -42,6 +44,7 @@ export class ContextMenu extends Menu {
 			new CustomModule('3', 'Сообщение'),
 			new VideoPlayModule('4', 'Случайное видео'),
 			new RandomAudioModule('5', 'Случайный звук'),
+			new TimerModule('6', 'Таймер'),
 		]
 		modules.forEach(el => {
 			this.el.innerHTML = this.el.innerHTML + el.toHTML()
