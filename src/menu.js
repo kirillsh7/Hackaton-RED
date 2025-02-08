@@ -10,7 +10,7 @@ export class ContextMenu extends Menu {
 	constructor(selector) {
 		super(selector)
 		this.modules = [
-			new ClicksModule('0', ' ClicksModule "В разработке"'),
+			new ClicksModule('0', ' Аналитика Клика'),
 			new BackgroundModule('1', 'Изменить цвет фона'),
 			new ShapeModule('2', 'Случайная фигура'),
 			new CustomModule('3', 'Случайное сообщение'),
