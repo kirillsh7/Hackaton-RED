@@ -3,6 +3,8 @@ import { ClicksModule } from './modules/clicks.module'
 import { BackgroundModule } from './modules/background.module'
 import { ShapeModule } from './modules/shape.module'
 import { CustomModule } from './modules/custom_message.module'
+import { RandomAudioModule } from './modules/randomAudio'
+import { VideoPlayModule } from './modules/videoPlay'
 
 export class ContextMenu extends Menu {
 	open(e) {
@@ -17,9 +19,11 @@ export class ContextMenu extends Menu {
 	add() {
 		const modules = [
 			new ClicksModule('0', ' ClicksModule'),
-			new BackgroundModule('1', 'BackgroundModule'),
+			new BackgroundModule('1', 'Изменить цвет фона'),
 			new ShapeModule('2', 'ShapeModule'),
 			new CustomModule('3', 'Сообщение'),
+			new VideoPlayModule('4', 'Видео'),
+			new RandomAudioModule('5', 'Случайный звук'),
 		]
 		modules.forEach(el => {
 			this.el.innerHTML = this.el.innerHTML + el.toHTML()
