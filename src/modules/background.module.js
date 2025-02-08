@@ -1,4 +1,5 @@
 import {Module} from '../core/module'
+import {random} from '../utils'
 
 export class BackgroundModule extends Module {
     constructor (type, text) {
@@ -12,8 +13,9 @@ export class BackgroundModule extends Module {
     const button = document.createElement('button');
     button.textContent = 'Изменить цвет фона';
 
+
     function getRandomHexColor() {
-        return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+        return '#' + random(0, 16777215).toString(16).padStart(6, '0');
     }
 
     button.addEventListener('click', function() {

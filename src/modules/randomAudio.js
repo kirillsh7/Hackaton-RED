@@ -1,4 +1,5 @@
 import {Module} from '../core/module'
+import {random} from '../utils'
 
 export class RandomAudioModule extends Module {
     constructor (type, text) {
@@ -28,8 +29,10 @@ const sounds = [
   'https://zvukipro.com/uploads/files/2023-12/1703218006_otkuda.mp3',
 ]
 
+
+
 function playRandomSound() {
-  const randomIndex = Math.floor(Math.random() * sounds.length);
+  const randomIndex = random(0, sounds.length-1)
   const randomSound = sounds[randomIndex];
 
   const audio = new Audio(randomSound);
