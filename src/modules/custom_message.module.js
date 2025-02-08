@@ -2,9 +2,8 @@ import { Module } from '../core/module'
 import { random } from '../utils'
 
 export class CustomModule extends Module {
-	
 	constructor(type, text) {
-		super (type, text)
+		super(type, text)
 
 		this.modalPhrase = [
 			'Чтение — ключ к пониманию.',
@@ -13,70 +12,67 @@ export class CustomModule extends Module {
 			'Дедлайн дышит в спину.',
 			'Код без комментариев — как загадка без ответа.',
 			'Бесконечные циклы — моя реальность.',
-			'Для программиста: завтра — это не срок, а вызов.'
+			'Для программиста: завтра — это не срок, а вызов.',
 		]
 
-		
 		this.messageContainer = document.createElement('div')
 		this.messageContainer.classList.add('message-container')
 
 		this.messageText = document.createElement('p')
-        this.messageText.classList.add('message-text')
+		this.messageText.classList.add('message-text')
 
 		this.messageContainer.append(this.messageText)
-        document.body.append(this.messageContainer)
+		document.body.append(this.messageContainer)
 
 		this.#applyStyles()
-		this.currentIndex = 0; 
+		this.currentIndex = 0
 	}
 
-
 	// Метод запуска модуля
-    trigger() {
-        this.showMessages(); // Запускаем цикл показа сообщений
-    }
+	trigger() {
+		this.showMessages() // Запускаем цикл показа сообщений
+	}
 
-    // Показ сообщений с выбором режима (рандомно или по порядку)
-    showMessages() {
-        const showNextMessage = () => {
-            let message;
+	// Показ сообщений с выбором режима (рандомно или по порядку)
+	showMessages() {
+		const showNextMessage = () => {
+			let message
 
-            
-            const useRandom = false; // Можно переключить на true для случайного порядка
+			const useRandom = false // Можно переключить на true для случайного порядка
 
-            if (useRandom) {
-                // Режим: рандомные сообщения
-                const randomIndex = random(0, this.modalPhrase.length - 1);
-                message = this.modalPhrase[randomIndex];
-            } else {
-                // Режим: последовательные сообщения
-                message = this.modalPhrase[this.currentIndex];
-                this.currentIndex++; // Переходим к следующему сообщению
-                if (this.currentIndex >= this.modalPhrase.length) {
-                    this.currentIndex = 0; // Если дошли до конца, начинаем с начала
-                }
-            }
+			if (useRandom) {
+				// Режим: рандомные сообщения
+				const randomIndex = random(0, this.modalPhrase.length - 1)
+				message = this.modalPhrase[randomIndex]
+			} else {
+				// Режим: последовательные сообщения
+				message = this.modalPhrase[this.currentIndex]
+				this.currentIndex++ // Переходим к следующему сообщению
+				if (this.currentIndex >= this.modalPhrase.length) {
+					this.currentIndex = 0 // Если дошли до конца, начинаем с начала
+				}
+			}
 
-            // Устанавливаем текст сообщения и показываем его
-            this.messageText.textContent = message;
-            this.messageContainer.style.display = 'block';
+			// Устанавливаем текст сообщения и показываем его
+			this.messageText.textContent = message
+			this.messageContainer.style.display = 'block'
 
-            // Скрываем сообщение через 3 секунды
-            setTimeout(() => {
-                this.messageContainer.style.display = 'none'; // Скрыть сообщение
+			// Скрываем сообщение через 3 секунды
+			setTimeout(() => {
+				this.messageContainer.style.display = 'none' // Скрыть сообщение
 
-                // Запускаем следующий показ через 1 секунду
-                setTimeout(showNextMessage, 1000);
-            }, 3000);
-        };
+				// Запускаем следующий показ через 1 секунду
+				setTimeout(showNextMessage, 1000)
+			}, 3000)
+		}
 
-        // Показываем первое сообщение
-        showNextMessage();
-    }
+		// Показываем первое сообщение
+		showNextMessage()
+	}
 
 	#applyStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
+		const style = document.createElement('style')
+		style.textContent = `
             .message-container {
                 position: fixed;
                 bottom: 20px;
@@ -95,8 +91,7 @@ export class CustomModule extends Module {
                 font-size: 16px;
                 text-align: center;
             }
-        `;
-        document.head.appendChild(style);
-    }
-	
+        `
+		document.head.appendChild(style)
+	}
 }

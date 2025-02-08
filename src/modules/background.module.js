@@ -1,8 +1,7 @@
 import { Module } from '../core/module'
 
 export class BackgroundModule extends Module {
-	toggle() {
-		console.log("Я BackgroundModule ")
-
+	trigger() {
+		console.log('Я BackgroundModule ')
 	}
 }
