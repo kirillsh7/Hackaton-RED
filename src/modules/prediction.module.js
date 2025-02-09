@@ -93,12 +93,12 @@ export class PredictionModule extends Module {
 		this.predictionText.textContent = prediction
 		this.predictionContainer.style.display = 'block'
 
-		// убираем тайме, если он уже есть
+		// убираем таймер, если он уже есть
 		if (this.hideModalTimer) {
             clearTimeout(this.hideModalTimer);
         }
 
-        // Скрываем предсказание через 3 секунды
+        // Скрываем предсказание через 4 секунды
         this.hideModalTimer = setTimeout(() => {
             this.predictionContainer.style.display = 'none';
         }, 4000);
