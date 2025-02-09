@@ -31,24 +31,20 @@ export class ContextMenu extends Menu {
 			this.el.style.top = `${e.pageY}px`
 		}
 		this.$bodyChildNodes.forEach(el => {
-			if (el === document.querySelector('video')) {
+			if (
+				el === document.querySelector('video') ||
+				el === document.querySelector('.timer') ||
+				el === document.querySelector('.timer-block')
+			) {
 				document.body.removeChild(el)
 			}
 		})
 	}
 	add() {
-		const modules = [
-			new ClicksModule('0', ' ClicksModule'),
-			new BackgroundModule('1', 'Изменить цвет фона'),
-			new ShapeModule('2', 'ShapeModule'),
-			new CustomModule('3', 'Сообщение'),
-			new VideoPlayModule('4', 'Случайное видео'),
-			new RandomAudioModule('5', 'Случайный звук'),
-			new TimerModule('6', 'Таймер'),
-		]
-		const listModules = modules.map(el => el.toHTML()).join('')
+		const listModules = this.modules.map(el => el.toHTML()).join('')
 		this.el.innerHTML = listModules
 		this.el.addEventListener('click', e => {
+			e.stopPropagation()
 			const type = e.target.dataset.type
 			this.modules[+type].trigger()
 			this.close()

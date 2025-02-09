@@ -1,121 +1,86 @@
 import { Module } from '../core/module'
 
 export class TimerModule extends Module {
+	constructor(type, text) {
+		super(type, text)
+		this.$elementTimer = document.createElement('div')
+	}
 
-trigger() {
+	trigger() {
+		this.$elementTimer.className = 'timer-block'
+		const inputLabel = document.createElement('label')
+		inputLabel.textContent = 'Введите количество секунд'
 
-const inputLabel = document.createElement('label');
-inputLabel.textContent = 'Введите количество секунд';
+		const inputSeconds = document.createElement('input')
+		inputSeconds.type = 'number'
+		inputSeconds.value = 10
 
-const inputSeconds = document.createElement('input');
-inputSeconds.type = 'number';
-inputSeconds.value = 10;
+		const startButton = document.createElement('button')
+		startButton.className = 'timer-button'
+		startButton.textContent = 'Включить таймер'
 
-const startButton = document.createElement('button');
-startButton.textContent = 'Включить таймер';
+		const timerContainer = document.createElement('div')
+		timerContainer.id = 'timer'
+		timerContainer.style.display = 'none'
+		timerContainer.textContent = '00:00'
 
-const timerContainer = document.createElement('div');
-timerContainer.id = 'timer';
-timerContainer.style.display = 'none';
-timerContainer.textContent = '00:00';
+		const messageContainer = document.createElement('div')
+		messageContainer.id = 'message'
+		messageContainer.style.display = 'none'
+		messageContainer.textContent = 'Отсчет окончен!'
 
-const messageContainer = document.createElement('div');
-messageContainer.id = 'message';
-messageContainer.style.display = 'none';
-messageContainer.textContent = 'Отсчет окончен!';
+		this.$elementTimer.append(
+			inputLabel,
+			inputSeconds,
+			startButton,
+			timerContainer,
+			messageContainer
+		)
+		document.body.appendChild(this.$elementTimer)
 
-document.body.appendChild(inputLabel);
-document.body.appendChild(inputSeconds);
-document.body.appendChild(startButton);
-document.body.appendChild(timerContainer);
-document.body.appendChild(messageContainer);
+		startButton.addEventListener('click', function () {
+			let totalSeconds = Number(inputSeconds.value)
 
-const style = document.createElement('style');
-style.textContent = `
-    body {
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    transition: background-color 0.5s ease;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #3e8e41;
-  }
+			if (isNaN(totalSeconds) || totalSeconds <= 0) {
+				alert('Пожалуйста, введите корректное количество секунд.')
+				return
+			}
 
-  #timer {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  #message {
-    text-align: center;
-    font-size: 20px;
-    color: red;
-  }
-`;
-document.head.appendChild(style);
+			messageContainer.style.display = 'none'
 
-startButton.addEventListener('click', function() {
-  let totalSeconds = Number(inputSeconds.value);
+			inputLabel.style.display = 'none'
+			inputSeconds.style.display = 'none'
+			startButton.style.display = 'none'
 
-  if (isNaN(totalSeconds) || totalSeconds <= 0) {
-    alert('Пожалуйста, введите корректное количество секунд.');
-    return;
-  }
+			timerContainer.style.display = 'block'
 
-  messageContainer.style.display = 'none';
+			function startTimer(seconds) {
+				let timerInterval = setInterval(function () {
+					let minutes = Math.floor(seconds / 60)
+					let remainingSeconds = seconds % 60
 
-  inputLabel.style.display = 'none';
-  inputSeconds.style.display = 'none';
-  startButton.style.display = 'none';
+					minutes = minutes < 10 ? '0' + minutes : minutes
+					remainingSeconds =
+						remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds
 
-  timerContainer.style.display = 'block';
+					timerContainer.textContent = minutes + ':' + remainingSeconds
 
-  function startTimer(seconds) {
-    let timerInterval = setInterval(function() {
-      let minutes = Math.floor(seconds / 60);
-      let remainingSeconds = seconds % 60;
+					if (seconds <= 0) {
+						clearInterval(timerInterval)
+						timerContainer.textContent = '00:00'
+						messageContainer.style.display = 'block'
+						setTimeout(function () {
+							timerContainer.remove()
+							messageContainer.remove()
+						}, 2500)
+						return
+					} else {
+						seconds--
+					}
+				}, 1000)
+			}
 
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      remainingSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
-
-      timerContainer.textContent = minutes + ":" + remainingSeconds;
-
-      if (seconds <= 0) {
-        clearInterval(timerInterval);
-        timerContainer.textContent = "00:00";
-        messageContainer.style.display = 'block';
-        setTimeout(function() {
-          timerContainer.remove();
-          messageContainer.remove();
-        }, 2500);
-        return;
-      } else {
-        seconds--;
-      }
-    }, 1000);
-  }
-
-  startTimer(totalSeconds);
-})
-}}
+			startTimer(totalSeconds)
+		})
+	}
+}

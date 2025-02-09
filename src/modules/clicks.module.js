@@ -23,7 +23,7 @@ export class ClicksModule extends Module {
 
 		this.timer.className = 'timer'
 
-		const handler = function (e) {
+		const handler = e => {
 			if (e.type === 'click') {
 				this.click++
 			} else if (e.type === 'dblclick') {
@@ -38,7 +38,7 @@ export class ClicksModule extends Module {
 
 			this.time--
 
-			if (this.time < 0) {
+			if (this.time === 0) {
 				clearInterval(interval)
 				this.endTimer()
 			}
@@ -55,6 +55,7 @@ export class ClicksModule extends Module {
 
 		this.click = 0
 		this.dblclick = 0
+		this.time = 5
 		this.isRunning = false
 	}
 }
