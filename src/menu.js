@@ -37,7 +37,8 @@ export class ContextMenu extends Menu {
 				el === document.querySelector('video') ||
 				el === document.querySelector('.timer') ||
 				el === document.querySelector('.timer-block') ||
-				el === document.querySelector('.random-shape')
+				el === document.querySelector('.random-shape') ||
+				el === document.querySelector('.prediction-container')
 			) {
 				document.body.removeChild(el)
 			}

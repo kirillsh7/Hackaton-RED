@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -81,4 +82,26 @@ body {
 
 .timer-button:hover {
     background-color: #3e8e41;
+}
+.prediction-container {
+    /* position: fixed; */
+    bottom: 100px; /* Расположение над звездой */
+    right: 20%;
+    left: 20%;
+    background-color: #f8f3ed;
+    color: #0d1b2a;
+    border: 1px solidrgb(53, 50, 40);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    user-select: none;              
+}
+.prediction-text {
+    margin: 0;
+    font-family: "Great Vibes", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 44px;
+    text-align: center;
 }
