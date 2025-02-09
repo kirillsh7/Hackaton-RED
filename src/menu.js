@@ -6,6 +6,7 @@ import { CustomModule } from './modules/custom_message.module'
 import { RandomAudioModule } from './modules/randomAudio'
 import { VideoPlayModule } from './modules/videoPlay'
 import { TimerModule } from './modules/timer.module'
+import { PredictionModule } from './modules/prediction.module'
 
 export class ContextMenu extends Menu {
 	constructor(selector) {
@@ -18,6 +19,7 @@ export class ContextMenu extends Menu {
 			new VideoPlayModule('4', 'Случайное видео'),
 			new RandomAudioModule('5', 'Случайный звук'),
 			new TimerModule('6', 'Таймер'),
+			new PredictionModule('7', 'Предсказание'),
 		]
 		this.$bodyChildNodes = document.body.childNodes
 	}
@@ -34,10 +36,12 @@ export class ContextMenu extends Menu {
 			if (
 				el === document.querySelector('video') ||
 				el === document.querySelector('.timer') ||
-				el === document.querySelector('.timer-block')
+				el === document.querySelector('.timer-block') ||
+				el === document.querySelector('.random-shape')
 			) {
 				document.body.removeChild(el)
 			}
+
 		})
 	}
 	add() {
@@ -52,5 +56,11 @@ export class ContextMenu extends Menu {
 	}
 	close() {
 		this.el.classList.remove('open')
+		this.el.removeEventListener('click', e => {
+			e.stopPropagation()
+			const type = e.target.dataset.type
+			this.modules[+type].trigger()
+			this.close()
+		})
 	}
 }
